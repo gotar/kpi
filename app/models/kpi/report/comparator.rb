@@ -27,9 +27,7 @@ module KPI
       end
 
       def method_missing(name, *args)
-        @reports.first.class.defined_kpis.each do |kpi_method|
-          @compare.call(*@reports.map(&:"#{kpi_method}"))
-        end
+        @compare.call(*@reports.map(&name.to_sym))
       end
 
     end
